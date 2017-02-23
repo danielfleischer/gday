@@ -12,7 +12,6 @@ def fill_server(capacity, videos):
             continue
         ret.add(i)
         curr += size
-    
     return ret
     
 if __name__ == '__main__':
