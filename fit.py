@@ -35,9 +35,7 @@ def fit(endpoints, requests, solution):
         
         saved_latency = endpoint[0] - min_latency
 
-        print 'adding saved time: %i * %i' % (times, saved_latency)
         saved_time += saved_latency * times
-        print 'adding times: %i' % (times, )
         total_watches += times
 
     # average
