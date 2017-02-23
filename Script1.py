@@ -1,15 +1,14 @@
-
-# coding: utf-8
-
-# In[206]:
-
 import csv
 import numpy as np
 from random import shuffle, sample, choice
 from math import floor
 
 
-# In[258]:
+couples = 50
+pop_size = couples**2
+generations = 1000
+mutate_prob = 0.01
+
 
 fname = 'me_at_the_zoo.in'
 
@@ -168,22 +167,22 @@ def fit(solution):
 
 # In[274]:
 
-couples = 50
-pop_size = couples**2
-generations = 1000
-mutate_prob = 0.01
+
 
 
 # In[290]:
 
 def run_evol():
+    fitted_best = [0,0]
     pop = [initial_guess() for a in range(pop_size)]
     for gen in range(generations):
 #         print pop
         fited = [[p,fit(p)] for i,p in enumerate(pop)]
         fited.sort(key = lambda x: x[1])
         best = fited[:20]
-#         print fited[-1]
+        if (fited[0][1] > fitted_best[1]):
+        	fitted_best = fited
+#        print fited[-1]
         best = [l[0] for l in best]
         new_pop = []
         for a in best:
@@ -200,11 +199,6 @@ def run_evol():
 
 # In[288]:
 
-a = initial_guess()
-b = initial_guess()
-print a, '\n'
-print b
-c  
 
 
 # In[ ]:
@@ -217,36 +211,4 @@ c
 run_evol()
 
 
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# ## Output
-
-# In[ ]:
-
-def write_out(fout='output.in', cache_list):
-    with open(fout, 'w') as f:
-        f.write(len(cache_list))
 
