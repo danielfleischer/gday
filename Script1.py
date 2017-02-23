@@ -9,31 +9,31 @@ from random import shuffle, sample, choice
 from math import floor
 
 
-# In[242]:
+# In[258]:
 
-fname = 'kittens.in'
+fname = 'me_at_the_zoo.in'
 
 
-# In[243]:
+# In[259]:
 
 ans = open(fname).read().splitlines()
 
 
 # ## Parameters:
 
-# In[244]:
+# In[260]:
 
 video_num, endpoint_num, request_num, cache_num, cache_size_limit = map(int, ans[0].split())
 
 
-# In[245]:
+# In[261]:
 
 video_sizes = list(enumerate(map(int, ans[1].split())))
 
 
 # ## Endpoints
 
-# In[246]:
+# In[262]:
 
 rest = ans[2:]
 endpoints = []
@@ -49,7 +49,7 @@ for endpoint in range(endpoint_num):
 
 # ## Requests
 
-# In[247]:
+# In[263]:
 
 rest = rest[point:]
 
@@ -83,7 +83,7 @@ for l in range(request_num):
 
 
 
-# In[249]:
+# In[264]:
 
 def fill_server(capacity, videos):
     curr = 0
@@ -98,7 +98,7 @@ def fill_server(capacity, videos):
     return ret
 
 
-# In[250]:
+# In[265]:
 
 def initial_guess():
     guess = []
@@ -115,7 +115,7 @@ def initial_guess():
     return guess
 
 
-# In[251]:
+# In[266]:
 
 def mutate(instance):
     cacheToReplace = choice(instance)
@@ -131,14 +131,14 @@ def mutate(instance):
             cacheToReplace[1].append(videoToReplace)
 
 
-# In[252]:
+# In[267]:
 
 def mate(inst1, inst2):
     cut = int(min(len(inst1), len(inst2))/2.0)
     return inst1[:cut] + inst2[cut:]
 
 
-# In[254]:
+# In[296]:
 
 def fit(solution):
     saved_time = 0 # in ms
@@ -161,33 +161,20 @@ def fit(solution):
         total_watches += times
 
     # average
-    return floor(1000.0 * saved_time / total_watches)
+    a = floor(1000.0 * saved_time / total_watches)
+    print a
+    return a
 
 
-# In[ ]:
+# In[274]:
 
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[255]:
-
-couples = 20
+couples = 50
 pop_size = couples**2
-generations = 10
-mutate_prob = 0.1
+generations = 1000
+mutate_prob = 0.01
 
 
-# In[240]:
+# In[290]:
 
 def run_evol():
     pop = [initial_guess() for a in range(pop_size)]
@@ -196,7 +183,7 @@ def run_evol():
         fited = [[p,fit(p)] for i,p in enumerate(pop)]
         fited.sort(key = lambda x: x[1])
         best = fited[:20]
-        print fited[0]
+#         print fited[-1]
         best = [l[0] for l in best]
         new_pop = []
         for a in best:
@@ -211,12 +198,21 @@ def run_evol():
 #     print init
 
 
+# In[288]:
+
+a = initial_guess()
+b = initial_guess()
+print a, '\n'
+print b
+c  
+
+
 # In[ ]:
 
 
 
 
-# In[241]:
+# In[295]:
 
 run_evol()
 
